@@ -1,0 +1,46 @@
+
+
+.push-top {
+    margin-top: 50px;
+  }
+
+.button-edit{
+    background-color: #666dd1;
+    color: white;
+}
+
+.button-delete{
+    background-color: #f73a21;
+    color: white;
+}
+
+.button-add{
+    background-color: #48a57e;
+    color: white;
+}
+
+.header{
+    background-color: #b1b3ca;
+ 
+}
+
+.button-welcome{
+    background-color: rgb(58, 58, 58);
+    color: white;
+}
+
+td {
+    padding: 10px 0
+   }
+
+
+
+body{
+    background: #666dd1;
+    background: -webkit-linear-gradient(to right, #99aab5, #666dd1);
+    background: linear-gradient(to right, #99aab5, #666dd1);
+    min-height: 100vh;
+
+}
+
+
