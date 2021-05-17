@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Contact;
+use App\Models\Ticket;
 
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ->count(10)
             ->has(Contact::factory()->count(20), 'contacts')
             ->create();
+
         
     }
 }

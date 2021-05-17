@@ -14,6 +14,10 @@
     color: white;
 }
 
+.right{
+    text-align: right;
+}
+
 .button-add{
     background-color: #48a57e;
     color: white;
@@ -29,18 +33,10 @@
     color: white;
 }
 
-td {
-    padding: 10px 0
-   }
-
-
 
 body{
-    background: #666dd1;
-    background: -webkit-linear-gradient(to right, #99aab5, #666dd1);
-    background: linear-gradient(to right, #99aab5, #666dd1);
+    background: rgb(243, 244, 246);
     min-height: 100vh;
 
 }
-
 

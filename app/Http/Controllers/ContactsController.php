@@ -19,9 +19,8 @@ class ContactsController extends Controller
 
     public function index()
     {
-        
         $contacts = Auth::user()->contacts;
-        return view('contacts.index', compact('contacts'));    
+        return view('contacts.index', compact('contacts'));   
     }
 
     public function create()
@@ -40,7 +39,7 @@ class ContactsController extends Controller
         $contact->user_id = Auth::id();
         $contact->save();
     
-        return redirect('/dashboard')->with('completed', 'Contact has been saved!');
+        return redirect('/dashboard/contacts')->with('completed', 'Contact has been saved!');
     }
 
     public function show()
@@ -52,11 +51,14 @@ class ContactsController extends Controller
     {
         $contact = Contact::findOrFail($id);
         if ($contact->user_id !== Auth::id()) {
-            return redirect()->to('/dashboard');;
+            return redirect()->to('/dashboard/contacts');;
         }
         return view('contacts.edit', compact('contact'));
     }
 
+    public function home(){
+        return view('dashboard');
+    }
 
     public function update($id)
     {
@@ -71,7 +73,7 @@ class ContactsController extends Controller
         $contact->user_id = $user_id;
         $contact->save();
 
-        return redirect('/dashboard');
+        return redirect('/dashboard/contacts');
     }
 
     public function destroy($id)
@@ -79,7 +81,7 @@ class ContactsController extends Controller
         $contact = Contact::findOrFail($id);
         $contact->delete();
 
-        return redirect('/dashboard')->with('completed', 'Contact has been deleted');
+        return redirect('/dashboard/contacts')->with('completed', 'Contact has been deleted');
     }
 
 

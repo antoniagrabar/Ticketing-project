@@ -18,7 +18,7 @@ class ContactFactory extends Factory
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'email_address' => $this->faker->unique()->safeEmail(),
-            'phone_number' => $this->faker->numerify('##########')
+            'phone_number' => $this->faker->numerify('##########'),
         ];
     }
 }

@@ -11,6 +11,8 @@
     }
 </style>
 
+
+
 <div class="card push-top">
   <div class="card-header">
     Edit & Update
@@ -26,7 +28,7 @@
         </ul>
       </div><br />
     @endif
-      <form action="{{ route('update', $contact->id) }}"  method="POST">
+      <form  method="POST" action="{{ route('update', $contact->id) }}">
       <div class="form-group">
             @csrf
             <label for="name">Name</label>
