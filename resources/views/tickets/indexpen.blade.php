@@ -25,9 +25,9 @@
                     </div>
                     @endif
 
-                    @if($tickets->isNotEmpty())
+                    @if($pendingTickets->isNotEmpty())
                     <div class="row">
-                        @foreach($tickets as $ticket)
+                        @foreach($pendingTickets as $ticket)
                         <div class="col-6 col-md-4">
                             <div class="card grid-item">
                                 <div class="card-content">
@@ -68,7 +68,7 @@
                     </div>
                     @else 
                         <div class="text-black mt-5">
-                            Currently you have no tickets.
+                            There are no pending tickets.
                         </div>
                     @endif
                 </div>

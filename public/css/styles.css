@@ -1,4 +1,19 @@
 
+input{
+    border:none;
+    background-color: transparent;
+  }
+  
+  input:focus,
+  select:focus,
+  textarea:focus,
+  button:focus {
+      outline: none;
+  }
+  
+  .fa-user-circle-o{
+    color: gray;
+  }
 
 .push-top {
     margin-top: 50px;
@@ -39,4 +54,8 @@ body{
     min-height: 100vh;
 
 }
+
+.blue{
+    background-color: #99aab5;
+  }
 

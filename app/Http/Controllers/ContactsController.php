@@ -20,7 +20,22 @@ class ContactsController extends Controller
     public function index()
     {
         $contacts = Auth::user()->contacts;
-        return view('contacts.index', compact('contacts'));   
+        return view('contacts.index', compact('contacts'));  
+
+    }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+        
+        $contacts = Contact::query()  
+            ->where('user_id','=',Auth::id())
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('address', 'LIKE', "%{$search}%")
+            ->orWhere('email_address', 'LIKE', "%{$search}%")
+            ->get();
+
+         return view('contacts.search', compact('contacts'));
+   
     }
 
     public function create()
@@ -28,9 +43,22 @@ class ContactsController extends Controller
         return view('contacts.create');
     }
 
+    public function statistics(){
+        $contacts = Auth::user()->contacts->count(); 
+        return view('dashboard', compact('contactCount'));
+    }
 
-    public function store()
+
+    public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email_address' => 'required',
+            'phone_number' => 'required|numeric',
+        ]);
+
         $contact = new Contact();
         $contact->name = request('name');
         $contact->address = request('address');
@@ -39,7 +67,7 @@ class ContactsController extends Controller
         $contact->user_id = Auth::id();
         $contact->save();
     
-        return redirect('/dashboard/contacts')->with('completed', 'Contact has been saved!');
+        return redirect('/dashboard/contacts')->with('alert', 'Contact successfully added');
     }
 
     public function show()
@@ -56,9 +84,6 @@ class ContactsController extends Controller
         return view('contacts.edit', compact('contact'));
     }
 
-    public function home(){
-        return view('dashboard');
-    }
 
     public function update($id)
     {
@@ -73,7 +98,7 @@ class ContactsController extends Controller
         $contact->user_id = $user_id;
         $contact->save();
 
-        return redirect('/dashboard/contacts');
+        return redirect('/dashboard/contacts')->with('alert', 'Contact has been updated');
     }
 
     public function destroy($id)
@@ -81,7 +106,7 @@ class ContactsController extends Controller
         $contact = Contact::findOrFail($id);
         $contact->delete();
 
-        return redirect('/dashboard/contacts')->with('completed', 'Contact has been deleted');
+        return redirect('/dashboard/contacts')->with('alert', 'Contact has been deleted');
     }
 
 

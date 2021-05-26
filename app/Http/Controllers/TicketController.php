@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Models\Type;
 use App\Providers\RouteServiceProvider;
+use App\Events\CreatedTicket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,22 @@ class TicketController extends Controller
         return view('tickets.index', compact('tickets', 'contacts', 'types'));    
         
     }
+
+    public function indexCompleted(){
+        $tickets = Auth::user()->tickets;
+        $completedTickets = $tickets->where('status','=','1');
+        $contacts = Auth::user()->contacts;
+        $types = Type::all();
+        return view('tickets.indexcom', compact('completedTickets', 'contacts', 'types'));
+    }
+
+    public function indexPending(){
+        $tickets = Auth::user()->tickets;
+        $pendingTickets = $tickets->where('status','=','0');
+        $contacts = Auth::user()->contacts;
+        $types = Type::all();
+        return view('tickets.indexpen', compact('pendingTickets', 'contacts', 'types'));
+    }
     
     public function create($id)
     {
@@ -34,10 +51,10 @@ class TicketController extends Controller
     public function store(Request $request, $id)
     {
         
-        $request->validate([
-            'name' => 'required',
-            'text' => 'required',
-        ]);
+        /* $request->validate([
+            'title' => 'required',
+            'comment' => 'required',
+        ]); */
             
         $user_id = Auth::id();
         $ticket = new Ticket();
@@ -48,7 +65,9 @@ class TicketController extends Controller
         $ticket->contact_id = $id;
         $ticket->save();
 
-        return redirect('/dashboard/contacts')->with('success', 'Ticket successfully added');
+        event(new CreatedTicket($ticket));
+
+        return redirect('/dashboard/contacts')->with('alert', 'Ticket successfully added');
     }
 
     public function show($id)
@@ -77,7 +96,7 @@ class TicketController extends Controller
         $ticket->status = request('status');
         $ticket->save();
 
-        return redirect('/dashboard/tickets')->with('completed', 'Ticket has been updated');
+        return redirect('/dashboard/tickets/all')->with('alert', 'Ticket has been updated');
     }
 
     public function destroy($id)
@@ -85,7 +104,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
         $ticket->delete();
 
-        return redirect('/dashboard/tickets')->with('completed', 'Ticket has been deleted');
+        return redirect('/dashboard/tickets/all')->with('alert', 'Ticket has been deleted');
     }
 
 }
