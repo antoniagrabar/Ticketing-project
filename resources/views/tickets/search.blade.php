@@ -30,15 +30,16 @@
                             </div>
                         </form>
                     </div>
+
                     @if(session()->get('alert'))
                     <div class=" alert alert-success">
                         {{ session()->get('alert') }}
                     </div>
                     @endif
 
-                    @if($pendingTickets->isNotEmpty())
+                    @if($tickets->isNotEmpty())
                     <div class="row">
-                        @foreach($pendingTickets as $ticket)
+                        @foreach($tickets as $ticket)
                         <div class="col-6 col-md-4">
                             <div class="card grid-item">
                                 <div class="card-content">
@@ -71,24 +72,21 @@
                                     </h4>
                                     </p>
 
-                                    <a href="{{ route('showTicket', $ticket->id) }}" class="card-btn"">View</a>
+                                    <a href="{{ route('showTicket', $ticket->id) }}" class="card-btn">View</a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
-                    <div class=" d-flex justify-content-center pt-2">
-                                        {!! $pendingTickets->links() !!}
-                                </div>
-                                @else
-                                <div class="text-black mt-3">
-                                    There are no pending tickets.
-                                </div>
-                                @endif
-                            </div>
-                        </div>
+                    @else
+                    <div class="text-black mt-3">
+                        The search did not match any tickets.
                     </div>
+                    @endif
                 </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>
 
 </html>

@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tickets</title>
+    <script src="https://use.fontawesome.com/ba8d0895b7.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/tickets.css') }}">
 </head>
@@ -14,10 +15,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="mb-5">
-                        <a href="{{ route('indexTicket') }}" class="underline">All</a> /
-                        <a href="{{ route('indexPending') }}" class="underline">Pending</a> /
-                        <a href="{{ route('indexCompleted') }}" class="underline">Completed</a>
+                    <div class="row pt-5 d-flex justify-content-between align-items-start px-3">
+                        <div class="mb-5">
+                            <a href="{{ route('indexTicket') }}" class="underline">All</a> /
+                            <a href="{{ route('indexPending') }}" class="underline">Pending</a> /
+                            <a href="{{ route('indexCompleted') }}" class="underline">Completed</a>
+                        </div>
+                        <form action=" {{ route('searchTicket') }}" method="GET">
+                            <div class="form-group input-group align-items-end">
+                                <input class="form-control" type="search" style="border-radius: 4px; height: 30.8px;" name="search" placeholder="Search ticket" required />
+                                <div class="input-group-append">
+                                    <button type="submit" class="input-group-text bg-transparent" style="border: none"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     @if(session()->get('alert'))
                     <div class=" alert alert-success">
@@ -66,15 +77,18 @@
                         </div>
                         @endforeach
                     </div>
-                    @else 
-                        <div class="text-black mt-5">
-                            There are no completed tickets.
+                    <div class=" d-flex justify-content-center pt-2">
+                                        {!! $completedTickets->links() !!}
+                                </div>
+                                @else
+                                <div class="text-black mt-3">
+                                    There are no completed tickets.
+                                </div>
+                                @endif
+                            </div>
                         </div>
-                    @endif
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
 </x-app-layout>
 
 </html>

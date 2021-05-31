@@ -18,7 +18,7 @@
                         Currently you have {{$contactCount}} contacts saved.
                     </div>
                     <div>
-                        Tickets({{$ticketCount}})
+                        Tickets({{ $ticketCount }})
                         <ul class="ml-4">
                             <li>Pending tickets: {{$pendingTickets}}</li>
                             <li>Completed tickets: {{$completedTickets}}</li>

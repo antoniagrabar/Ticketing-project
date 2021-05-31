@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateContactsTable extends Migration
 {
-
+    
     public function up()
     {
         Schema::create('contacts', function (Blueprint $table) {

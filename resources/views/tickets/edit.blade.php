@@ -32,7 +32,7 @@
               <form action="{{ route('updateTicket', $ticket->id) }}" method="POST">
                 <div class="form-group">
                   <label for="name">Title</label>
-                  <input type="text" class="form-control" name="name" value="{{ $ticket->name }}" />
+                  <input type="textbox" class="form-control" name="name" value="{{ $ticket->name }}" />
                   <label for="address">Comment</label>
                   <input type="textbox" class="form-control" name="text" value="{{ $ticket->text }}" />
                 </div>
@@ -44,7 +44,9 @@
                     <option selected={{ $ticket->status }} value="1">completed</option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-block button-edit">Update Ticket</button>
+                <div class="d-flex justify-content-center align-items-center pt-2">
+                  <button type="submit" class="btn button-edit">Update Ticket</button>
+                </div>
               </form>
             </div>
           </div>

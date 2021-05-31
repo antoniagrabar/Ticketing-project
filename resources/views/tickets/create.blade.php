@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacts</title>
+  <title>Tickets</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/styles.css') }}">
 </head>
@@ -16,10 +16,10 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
           <div class="card">
-            
             <div class="card-header">
               New ticket
             </div>
+            
             @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

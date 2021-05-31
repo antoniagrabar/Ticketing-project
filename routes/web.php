@@ -39,6 +39,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard/tickets/all', [TicketController::class, 'index'])->name('indexTicket');
     Route::get('/dashboard/tickets/pending', [TicketController::class, 'indexPending'])->name('indexPending');
     Route::get('/dashboard/tickets/completed', [TicketController::class, 'indexCompleted'])->name('indexCompleted');
+    Route::get('/dashboard/tickets/all/search', [TicketController::class, 'search'])->name('searchTicket');
+    Route::get('/dashboard/tickets/completed/search', [TicketController::class, 'searchCompleted'])->name('searchCompletedTicket');
+    Route::get('/dashboard/tickets/pending/search', [TicketController::class, 'searchPending'])->name('searchPendingTicket');
     Route::post('/dashboard/contacts/{contact}', [TicketController::class, 'store'])->name('storeTicket');
     Route::get('/dashboard/contacts/{contact}/create', [TicketController::class, 'create'])->name('createTicket');
     Route::get('/dashboard/tickets/{ticket}', [TicketController::class, 'show'])->name('showTicket');

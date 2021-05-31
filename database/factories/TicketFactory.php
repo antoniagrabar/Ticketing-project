@@ -10,12 +10,10 @@ use Illuminate\Support\Str;
 
 class TicketFactory extends Factory
 {
-
     protected $model = Ticket::class;
 
     public function definition()
     {
-
         $user_id = User::all()->random()->id;
         return [
             'user_id' => $user_id,

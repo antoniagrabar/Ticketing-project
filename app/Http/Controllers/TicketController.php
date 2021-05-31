@@ -18,27 +18,65 @@ class TicketController extends Controller
    
     public function index()
     {
-        $tickets = Auth::user()->tickets;
+        $tickets = Ticket::where('user_id', Auth::id())->paginate(9);
         $contacts = Auth::user()->contacts;
         $types = Type::all();
         return view('tickets.index', compact('tickets', 'contacts', 'types'));    
-        
     }
 
     public function indexCompleted(){
-        $tickets = Auth::user()->tickets;
-        $completedTickets = $tickets->where('status','=','1');
+        $completedTickets = Ticket::where('user_id', Auth::id())->where('status','=','1')->paginate(9);
         $contacts = Auth::user()->contacts;
         $types = Type::all();
         return view('tickets.indexcom', compact('completedTickets', 'contacts', 'types'));
     }
 
     public function indexPending(){
-        $tickets = Auth::user()->tickets;
-        $pendingTickets = $tickets->where('status','=','0');
+        $pendingTickets = Ticket::where('user_id', Auth::id())->where('status','=','0')->paginate(9);
         $contacts = Auth::user()->contacts;
         $types = Type::all();
         return view('tickets.indexpen', compact('pendingTickets', 'contacts', 'types'));
+    }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+        $tickets = Ticket::query()  
+            ->where('user_id','=',Auth::id())
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('text', 'LIKE', "%{$search}%")
+            ->get();
+        $contacts = Auth::user()->contacts;
+        $types = Type::all();
+
+        return view('tickets.search', compact('tickets', 'contacts', 'types'));
+    }
+
+    public function searchCompleted(Request $request){
+        $search = $request->input('search');
+        $tickets = Ticket::query()  
+            ->where('user_id','=',Auth::id())
+            ->where('status', '=', '1')
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('text', 'LIKE', "%{$search}%")
+            ->get();
+        $contacts = Auth::user()->contacts;
+        $types = Type::all();
+
+        return view('tickets.search', compact('tickets', 'contacts', 'types'));
+    }
+
+    public function searchPending(Request $request){
+        $search = $request->input('search');
+        $tickets = Ticket::query()  
+            ->where('user_id','=',Auth::id())
+            ->where('status', '=', '0')
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('text', 'LIKE', "%{$search}%")
+            ->get();
+        $contacts = Auth::user()->contacts;
+        $types = Type::all();
+
+        return view('tickets.search', compact('tickets', 'contacts', 'types'));
     }
     
     public function create($id)
@@ -50,11 +88,10 @@ class TicketController extends Controller
 
     public function store(Request $request, $id)
     {
-        
-        /* $request->validate([
-            'title' => 'required',
-            'comment' => 'required',
-        ]); */
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'text' => 'required|string|max:255',
+        ]); 
             
         $user_id = Auth::id();
         $ticket = new Ticket();

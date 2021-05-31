@@ -1,4 +1,3 @@
-</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +18,6 @@
             <div class="card-header">
               Add Contact
             </div>
-
             <div class="card-body">
               @if ($errors->any())
               <div class="alert alert-danger">
@@ -48,7 +46,9 @@
                   <label for="phone_number">Phone number</label>
                   <input type="tel" class="form-control" name="phone_number" />
                 </div>
-                <button type="submit" class="btn btn-block button-add">Create Contact</button>
+                <div class="d-flex justify-content-center align-items-center pt-2">
+                  <button type="submit" class="btn button-add">Create Contact</button>
+                </div>
               </form>
             </div>
           </div>
