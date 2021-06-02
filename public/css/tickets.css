@@ -4,11 +4,11 @@
   }
 
   .grid-item {
-    background-color: white;
+    background-color:	#f7f7f7;
     border-radius: 0.4rem;
+    border-color: #c5c5c5;
     overflow: hidden;
     margin-bottom: 1rem;
-    box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: 0.2s;
   }
@@ -24,10 +24,12 @@
   }
   
   .card-header {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     text-align: center;
     font-weight: 500;
     color: #0d0d0d;
+    background-color: 	#c5c5c5;
+    border-radius: 0.4rem;
     margin-bottom: 1.5rem;
   }
   

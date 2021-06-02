@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,17 +24,19 @@ class ContactsController extends Controller
         return view('contacts.index', compact('contacts'));  
     }
 
-    public function search(Request $request)
-    {
-        $search = $request->input('search');
-        
-        $contacts = Contact::query()  
-            ->where('user_id','=',Auth::id())
-            ->where('name', 'LIKE', "%{$search}%")
+  
+    public function search(Request $request){
+        $search = $request->input('search') ?: "";
+        $contacts = Contact::query()
+        ->where('user_id', Auth::id())
+        ->where(function(Builder $builder) use ($search){
+            $builder->where('name', 'LIKE', "%{$search}%")
             ->orWhere('id', 'LIKE', "%{$search}%")
             ->orWhere('address', 'LIKE', "%{$search}%")
-            ->orWhere('email_address', 'LIKE', "%{$search}%")
-            ->get();
+            ->orWhere('email_address', 'LIKE', "%{$search}%");
+        })
+        ->orderBy('id')
+        ->paginate(10);
 
         return view('contacts.search', compact('contacts'));
     }

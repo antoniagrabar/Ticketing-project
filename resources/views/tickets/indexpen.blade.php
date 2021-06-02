@@ -71,7 +71,11 @@
                                     </h4>
                                     </p>
 
-                                    <a href="{{ route('showTicket', $ticket->id) }}" class="card-btn"">View</a>
+                                    <a href="{{ route('showTicket', $ticket->id) }}">
+                                        <x-button class="btn-block d-flex align-items-center justify-content-center">
+                                            View
+                                        </x-button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

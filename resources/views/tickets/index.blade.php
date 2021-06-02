@@ -42,7 +42,7 @@
                         @foreach($tickets as $ticket)
                         <div class="col-6 col-md-4">
                             <div class="card grid-item">
-                                <div class="card-content">
+                                <div class="card-content" >
                                     <h1 class="card-header">
                                         @foreach($types as $type)
                                         <?php
@@ -53,26 +53,29 @@
                                         @endforeach
                                     </h1>
                                     <p class="card-text">
-                                    <h1 class="card-title">{{ $ticket->name }}</h1>
-                                    @foreach($contacts as $contact)
-                                    <?php
-                                    if ($contact->id == $ticket->contact_id) {
-                                        echo "By $contact->name";
-                                    }
-                                    ?>
-                                    @endforeach
-                                    <h4 class="pt-5">
+                                        <h1 class="card-title">{{ $ticket->name }}</h1>
+                                        @foreach($contacts as $contact)
                                         <?php
-                                        if ($ticket->status == 0) {
-                                            echo "Pending";
-                                        } else {
-                                            echo "Completed";
+                                        if ($contact->id == $ticket->contact_id) {
+                                            echo "By $contact->name";
                                         }
                                         ?>
-                                    </h4>
+                                        @endforeach
+                                        <h4 class="pt-5">
+                                            <?php
+                                            if ($ticket->status == 0) {
+                                                echo "Pending";
+                                            } else {
+                                                echo "Completed";
+                                            }
+                                            ?>
+                                        </h4>
                                     </p>
-
-                                    <a href="{{ route('showTicket', $ticket->id) }}" class="card-btn">View</a>
+                                    <a href="{{ route('showTicket', $ticket->id) }}">
+                                        <x-button class="btn-block d-flex align-items-center justify-content-center">
+                                            View
+                                        </x-button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

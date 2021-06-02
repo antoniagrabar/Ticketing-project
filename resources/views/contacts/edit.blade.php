@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contacts</title>
+  <script src="https://use.fontawesome.com/ba8d0895b7.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/styles.css') }}">
 </head>
@@ -14,11 +15,13 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-          <div class="card push-top">
+          <div style="color:black" class="pb-5">
+            <a href="{{ route('index')}}" class="underline"><i class="fa fa-long-arrow-left pr-2"></i>Go back</a>
+          </div>
+          <div class="card">
             <div class="card-header">
               Edit & Update
             </div>
-
             <div class="card-body">
               @if ($errors->any())
               <div class="alert alert-danger">
@@ -29,7 +32,7 @@
                 </ul>
               </div><br />
               @endif
-              <form  action="{{ route('update', $contact->id) }}" method="POST">
+              <form action="{{ route('update', $contact->id) }}" method="POST">
                 <div class="form-group">
                   @csrf
                   <label for="name">Name</label>
@@ -47,7 +50,9 @@
                   <label for="phone_number">Phone number</label>
                   <input type="tel" class="form-control" name="phone_number" value="{{ $contact->phone_number }}" />
                 </div>
-                <button type="submit" class="btn btn-block button-edit">Update User</button>
+                <div class="d-flex justify-content-center align-items-center pt-2">
+                <x-button type="submit" style="background: #6172d3">Update Contact</x-button>
+                </div>
               </form>
             </div>
           </div>

@@ -13,27 +13,14 @@ input{
     margin-top: 50px;
   }
 
-.button-edit{
-    background-color: #666dd1;
-    color: white;
-}
-
-.button-delete{
-    background-color: #f73a21;
-    color: white;
-}
 
 .right{
     text-align: right;
 }
 
-.button-add{
-    background-color: #48a57e;
-    color: white;
-}
-
 .header{
-    background-color: #b1b3ca;
+    background-color: #6474d4;
+    color: white;
  
 }
 
@@ -46,8 +33,23 @@ input{
 body{
     background: rgb(243, 244, 246);
     min-height: 100vh;
-
 }
+
+.delete-hover:hover{
+    color:#0456b3 !important;
+ }
+
+.card-header{
+    background-color: #c5c5c5;
+}
+
+.card-body{
+    background-color:	#f7f7f7;
+}
+
+
+
+
 
 
 

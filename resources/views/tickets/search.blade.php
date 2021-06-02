@@ -72,11 +72,18 @@
                                     </h4>
                                     </p>
 
-                                    <a href="{{ route('showTicket', $ticket->id) }}" class="card-btn">View</a>
+                                    <a href="{{ route('showTicket', $ticket->id) }}">
+                                        <x-button class="btn-block d-flex align-items-center justify-content-center">
+                                            View
+                                        </x-button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
+                    </div>
+                    <div class=" d-flex justify-content-center pt-2">
+                        {{isset($search)? $tickets->appends(['search'=> $search])->links() : $tickets->links()}}
                     </div>
                     @else
                     <div class="text-black mt-3">
