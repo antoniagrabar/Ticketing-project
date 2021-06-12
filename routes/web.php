@@ -19,8 +19,6 @@ Route::get('/', function () {
 }); 
 
 
-
-
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/dashboard', [UserController::class, 'statistics'])->name('home');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
@@ -28,26 +26,26 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/login', [AuthenticatedSessionController::class, 'store']);
     Route::get('/register', [RegisteredUserController::class, 'create']);
     Route::post('/register', [RegisteredUserController::class, 'store']);
-    Route::post('/dashboard/contacts', [ContactsController::class, 'store'])->name('store');
-    Route::get('/dashboard/contacts', [ContactsController::class, 'index'])->name('index');
-    Route::get('/dashboard/contacts/create', [ContactsController::class, 'create'])->name('create');
-    Route::get('/dashboard/contacts/search', [ContactsController::class, 'search'])->name('search');
-    Route::post('/dashboard/contacts/{contact}', [ContactsController::class, 'update'])->name('update');
-    Route::get('/dashboard/contacts/{contact}', [ContactsController::class, 'show']);
-    Route::delete('/dashboard/contacts/{contact}', [ContactsController::class, 'destroy'])->name('destroy');
-    Route::get('/dashboard/contacts/{contact}/edit', [ContactsController::class, 'edit'])->name('edit');
-    Route::get('/dashboard/tickets/all', [TicketController::class, 'index'])->name('indexTicket');
-    Route::get('/dashboard/tickets/pending', [TicketController::class, 'indexPending'])->name('indexPending');
-    Route::get('/dashboard/tickets/completed', [TicketController::class, 'indexCompleted'])->name('indexCompleted');
-    Route::get('/dashboard/tickets/all/search', [TicketController::class, 'search'])->name('searchTicket');
-    Route::get('/dashboard/tickets/completed/search', [TicketController::class, 'searchCompleted'])->name('searchCompletedTicket');
-    Route::get('/dashboard/tickets/pending/search', [TicketController::class, 'searchPending'])->name('searchPendingTicket');
-    Route::post('/dashboard/contacts/{contact}', [TicketController::class, 'store'])->name('storeTicket');
-    Route::get('/dashboard/contacts/{contact}/create', [TicketController::class, 'create'])->name('createTicket');
-    Route::get('/dashboard/tickets/{ticket}', [TicketController::class, 'show'])->name('showTicket');
-    Route::post('/dashboard/tickets/{ticket}', [TicketController::class, 'update'])->name('updateTicket');
-    Route::get('/dashboard/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('editTicket');
-    Route::delete('/dashboard/tickets/{ticket}', [TicketController::class, 'destroy'])->name('destroyTicket');
+    Route::post('contacts', [ContactsController::class, 'store'])->name('storeContact');
+    Route::get('contacts', [ContactsController::class, 'index'])->name('indexContact');
+    Route::get('/contacts/create', [ContactsController::class, 'create'])->name('createContact');
+    Route::get('/contacts/search', [ContactsController::class, 'search'])->name('searchContact');
+    Route::post('/contacts/{contact}', [ContactsController::class, 'update'])->name('updateContact');
+    Route::get('/contacts/{contact}', [ContactsController::class, 'showContact']);
+    Route::delete('/contacts/{contact}', [ContactsController::class, 'destroy'])->name('destroyContact');
+    Route::get('/contacts/{contact}/edit', [ContactsController::class, 'edit'])->name('editContact');
+    Route::get('/tickets/all', [TicketController::class, 'index'])->name('indexTicket');
+    Route::get('/tickets/pending', [TicketController::class, 'indexPending'])->name('indexPending');
+    Route::get('/tickets/completed', [TicketController::class, 'indexCompleted'])->name('indexCompleted');
+    Route::get('/tickets/all/search', [TicketController::class, 'search'])->name('searchTicket');
+    Route::get('/tickets/completed/search', [TicketController::class, 'searchCompleted'])->name('searchCompletedTicket');
+    Route::get('/tickets/pending/search', [TicketController::class, 'searchPending'])->name('searchPendingTicket');
+    Route::post('/contacts/{contact}', [TicketController::class, 'store'])->name('storeTicket');
+    Route::get('/contacts/{contact}/create', [TicketController::class, 'create'])->name('createTicket');
+    Route::get('/tickets/{ticket}', [TicketController::class, 'show'])->name('showTicket');
+    Route::post('/tickets/{ticket}', [TicketController::class, 'update'])->name('updateTicket');
+    Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('editTicket');
+    Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy'])->name('destroyTicket');
 }); 
 
 require __DIR__.'/auth.php';

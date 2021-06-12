@@ -16,7 +16,7 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
           <div style="color:black" class="pb-5">
-            <a href="{{ route('index')}}" class="underline"><i class="fa fa-long-arrow-left pr-2"></i>Go back</a>
+            <a href="{{ route('indexContact')}}" class="underline"><i class="fa fa-long-arrow-left pr-2"></i>Go back</a>
           </div>
           <div class="card">
             <div class="card-header">
@@ -32,7 +32,7 @@
                 </ul>
               </div><br />
               @endif
-              <form action="{{ route('update', $contact->id) }}" method="POST">
+              <form action="{{ route('updateContact', $contact->id) }}" method="POST">
                 <div class="form-group">
                   @csrf
                   <label for="name">Name</label>
@@ -51,7 +51,7 @@
                   <input type="tel" class="form-control" name="phone_number" value="{{ $contact->phone_number }}" />
                 </div>
                 <div class="d-flex justify-content-center align-items-center pt-2">
-                <x-button type="submit" style="background: #6172d3">Update Contact</x-button>
+                <x-button type="submit" style="background: #5062cc">Update Contact</x-button>
                 </div>
               </form>
             </div>

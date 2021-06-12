@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTicketRequest;
 use App\Models\Ticket;
 use App\Models\Type;
 use App\Models\Contact;
@@ -33,7 +34,7 @@ class TicketController extends Controller
         $completedTickets = Ticket::where('user_id', Auth::id())->where('status', '=', '1')->paginate(9);
         $contacts = Auth::user()->contacts;
         $types = Type::all();
-        return view('tickets.indexcom', compact('completedTickets', 'contacts', 'types'));
+        return view('tickets.completed', compact('completedTickets', 'contacts', 'types'));
     }
 
     public function indexPending()
@@ -41,10 +42,10 @@ class TicketController extends Controller
         $pendingTickets = Ticket::where('user_id', Auth::id())->where('status', '=', '0')->paginate(9);
         $contacts = Auth::user()->contacts;
         $types = Type::all();
-        return view('tickets.indexpen', compact('pendingTickets', 'contacts', 'types'));
+        return view('tickets.pending', compact('pendingTickets', 'contacts', 'types'));
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $status)
     {
         $search = $request->input('search') ?: "";
         $tickets = Ticket::query()
@@ -104,25 +105,12 @@ class TicketController extends Controller
     }
 
 
-    public function store(Request $request, $id)
+    public function store(StoreTicketRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'text' => 'required|string|max:255',
-        ]);
+        $data = array_merge($request->validated(), ['user_id'=>Auth::id(), 'contact_id'=>$id]);
+        $contacts = Ticket::query()->create($data);
 
-        $user_id = Auth::id();
-        $ticket = new Ticket();
-        $ticket->name = request('name');
-        $ticket->text = request('text');
-        $ticket->type_id = request('type_id');
-        $ticket->user_id = $user_id;
-        $ticket->contact_id = $id;
-        $ticket->save();
-
-        event(new CreatedTicket($ticket));
-
-        return redirect('/dashboard/contacts')->with('alert', 'Ticket successfully added');
+        return redirect('/contacts')->with('alert', 'Ticket successfully added');
     }
 
     public function show($id)
@@ -158,7 +146,7 @@ class TicketController extends Controller
         $ticket->status = request('status');
         $ticket->save();
 
-        return redirect('/dashboard/tickets/all')->with('alert', 'Ticket has been updated');
+        return redirect('/tickets/all')->with('alert', 'Ticket has been updated');
     }
 
     public function destroy($id)
@@ -166,6 +154,6 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
         $ticket->delete();
 
-        return redirect('/dashboard/tickets/all')->with('alert', 'Ticket has been deleted');
+        return redirect('/tickets/all')->with('alert', 'Ticket has been deleted');
     }
 }

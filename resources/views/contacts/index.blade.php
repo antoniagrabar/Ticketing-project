@@ -23,15 +23,15 @@
                         @endif
 
                         <div class="row pt-5 d-flex justify-content-between align-items-start px-3">
-                            <a href="{{ route('create') }}">
+                            <a href="{{ route('createContact') }}">
                                 <x-button>
                                     <i class="fa fa-user-plus mr-2"></i>
                                     Add contact
                                 </x-button>
                             </a>
-                            <form action=" {{ route('search') }}" method="GET">
-                                <div class="form-group input-group align-items-end">
-                                    <input class="form-control" type="search" style="border-radius: 4px; height: 30.8px;" name="search" placeholder="Search contact" required />
+                            <form action=" {{ route('searchContact') }}" method="GET">
+                                <div class="form-group input-group align-items-end ">
+                                    <input class="form-control" type="search" style="border-radius: 4px; height: 34px;" name="search" placeholder="Search contact" required />
                                     <div class="input-group-append">
                                         <button type="submit" class="input-group-text bg-transparent" style="border: none"><i class="fa fa-search"></i></button>
                                     </div>
@@ -62,16 +62,15 @@
                                             <td>{{$contact->email_address}}</td>
                                             <td>{{$contact->phone_number}}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('edit', $contact->id)}}">
+                                                <a href="{{ route('editContact', $contact->id)}}">
                                                     <i class="fa fa-edit fa-lg"></i>
                                                 </a>
-                                                <form action="{{ route('destroy', $contact->id) }}" method="post" style="display: inline-block">
+                                                <form action="{{ route('destroyContact', $contact->id) }}" method="post" style="display: inline-block">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit">
                                                         <i class="fa fa-trash fa-lg delete-hover pl-2 pr-2"></i>
                                                     </button>
-
                                                 </form>
                                                 <a href="{{ route('createTicket', $contact->id)}}""><i class=" fa fa-plus-square fa-lg"></i></a>
                                             </td>

@@ -15,7 +15,7 @@ class UserController extends Controller
         $ticketCount = $tickets->count();
         $completedTickets = $tickets->where('status','=','1')->count();
         $pendingTickets = $tickets->where('status','=','0')->count();
-        
+
         return view('dashboard', compact('contactCount', 'completedTickets', 'pendingTickets', 'ticketCount'));
     }
 

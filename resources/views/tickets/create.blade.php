@@ -57,7 +57,7 @@
                   <input type="text" class="form-control" name="text" />
                 </div>
                 <div class="d-flex justify-content-center align-items-center pt-2">
-                  <x-button type="submit" style="background: #6172d3">Create Ticket</x-button>
+                  <x-button type="submit" style="background: #5062cc">Create Ticket</x-button>
                 </div>
               </form>
             </div>
